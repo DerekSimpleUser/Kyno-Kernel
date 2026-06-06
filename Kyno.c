@@ -34,14 +34,14 @@ volatile char *video_memory = (volatile char *) 0xB8000;
 void kernel_main_c(void) {
     // 1. Limpiar pantalla de forma ultra-directa
     int i;
-    for (i = 0; i < 80 * 25 * 2; i += 2) {
+    for (i = 0; i < 4000; i += 2) {
         video_memory[i] = ' ';     
         video_memory[i+1] = 0x07;   
     }
 
     // 2. Pintar mensaje "KYNO KERNEL" en la fila 1, columna 1 (Amarillo 0x0E)
     const char *msg1 = "KYNO KERNEL ACTIVO - SUCESO";
-    int idx1 = (1 * 80 + 1) * 2;
+    int idx1 = 162;
     int j = 0;
     while (msg1[j] != '\0') {
         video_memory[idx1] = msg1[j];
@@ -52,7 +52,7 @@ void kernel_main_c(void) {
 
     // 3. Pintar mensaje de éxito en la fila 3, columna 1 (Verde 0x0A)
     const char *msg2 = "[OK] Modo C nativo corriendo en Linux puro!";
-    int idx2 = (3 * 80 + 1) * 2;
+    int idx2 = 482;
     j = 0;
     while (msg2[j] != '\0') {
         video_memory[idx2] = msg2[j];
